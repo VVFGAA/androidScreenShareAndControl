@@ -3,6 +3,7 @@ package com.wanjian.puppet;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.hardware.input.InputManager;
 import android.net.LocalServerSocket;
 import android.net.LocalSocket;
@@ -239,8 +240,15 @@ public class Main {
             surfaceClassName = "android.view.SurfaceControl";
             //  b = android.view.SurfaceControl.screenshot(size.x, size.y);
         }
-        b = (Bitmap) Class.forName(surfaceClassName).getDeclaredMethod("screenshot", new Class[]{Integer.TYPE, Integer.TYPE}).invoke(null, new Object[]{Integer.valueOf(size.x), Integer.valueOf(size.y)});
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            b = (Bitmap) Class.forName(surfaceClassName)
+                    .getDeclaredMethod("screenshot", new Class[]{Rect.class, Integer.TYPE, Integer.TYPE, Integer.TYPE})
+                    .invoke(null, new Object[]{new Rect(), Integer.valueOf(size.x), Integer.valueOf(size.y), 0});
+        } else {
+            b = (Bitmap) Class.forName(surfaceClassName)
+                    .getDeclaredMethod("screenshot", new Class[]{Integer.TYPE, Integer.TYPE})
+                    .invoke(null, new Object[]{Integer.valueOf(size.x), Integer.valueOf(size.y)});
+        }
 //        int rotation = wm.getRotation();
 //
 //        if (rotation == 0) {
