@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
  */
 
 public class Surface {
+    public static final int ROTATION_0 = 0;
     public static Bitmap screenshot(int x, int y){
         return null;
     }

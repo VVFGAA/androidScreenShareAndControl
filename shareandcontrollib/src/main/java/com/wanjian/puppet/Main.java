@@ -10,11 +10,13 @@ import android.net.LocalSocket;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.support.v4.view.InputDeviceCompat;
 import android.view.IWindowManager;
 import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.Surface;
+
+import androidx.core.view.InputDeviceCompat;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -243,7 +245,7 @@ public class Main {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             b = (Bitmap) Class.forName(surfaceClassName)
                     .getDeclaredMethod("screenshot", new Class[]{Rect.class, Integer.TYPE, Integer.TYPE, Integer.TYPE})
-                    .invoke(null, new Object[]{new Rect(), Integer.valueOf(size.x), Integer.valueOf(size.y), 0});
+                    .invoke(null, new Object[]{new Rect(), Integer.valueOf(size.x), Integer.valueOf(size.y), Surface.ROTATION_0});
         } else {
             b = (Bitmap) Class.forName(surfaceClassName)
                     .getDeclaredMethod("screenshot", new Class[]{Integer.TYPE, Integer.TYPE})

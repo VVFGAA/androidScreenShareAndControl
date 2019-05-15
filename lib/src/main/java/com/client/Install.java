@@ -21,18 +21,18 @@ public class Install {
     public static void install() {
 
 
-        adbCommond("push Main.dex /sdcard/Main.dex");
+        adbCommond("push Main.dex /data/local/tmp/screenshot.dex");
 
 
-        String path = "export CLASSPATH=/sdcard/Main.dex";
-        String app = "exec app_process /sdcard com.wanjian.puppet.Main";
+        String path = "export CLASSPATH=/data/local/tmp/screenshot.dex";
+        String app = "exec app_process /system/bin --nice-name=screenshot com.wanjian.puppet.Main";
 
         shellCommond(new String[]{path, app});
     }
 
     private static void adbCommond(String com) {
         System.out.println("adbCommond...."+com);
-        commond("sh", "./adb " + com);
+        commond("cmd", "adb " + com);
     }
 
     private static void shellCommond(String[] com) {
@@ -40,7 +40,7 @@ public class Install {
         try {
             Process process = Runtime
                     .getRuntime()
-                    .exec("./adb shell "); // adb
+                    .exec("adb shell "); // adb
             // shell
             final BufferedWriter outputStream = new BufferedWriter(
                     new OutputStreamWriter(process.getOutputStream()));

@@ -45,12 +45,12 @@ public class Client extends JFrame {
         portField.setText("8888");
 
         JPanel btnPanel = new JPanel(new BorderLayout(5, 5));
-        JButton btn = new JButton("é“¾æ¥");
+        JButton btn = new JButton("Á´½Ó");
         btnPanel.add(btn, BorderLayout.NORTH);
 
         tips = new JLabel();
         tips.setBorder(new EmptyBorder(0, 8, 0, 0));
-        tips.setText("æ¸…æ™°åº¦ 100%");
+        tips.setText("ÇåÎú¶È 100%");
         btnPanel.add(tips, BorderLayout.CENTER);
 
 
@@ -78,7 +78,7 @@ public class Client extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(360, 20, 350, 600);
 
-        setTitle("å±å¹•å…±äº«");
+        setTitle("ÆÁÄ»¹²Ïí");
         btn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -162,7 +162,7 @@ public class Client extends JFrame {
             public void stateChanged(ChangeEvent changeEvent) {
                 try {
                     int v = ((JSlider) changeEvent.getSource()).getValue();
-                    tips.setText("æ¸…æ™°åº¦ " + v + "%");
+                    tips.setText("ÇåÎú¶È " + v + "%");
                     writer.write("DEGREE" + v);
                     writer.newLine();
                     writer.flush();
